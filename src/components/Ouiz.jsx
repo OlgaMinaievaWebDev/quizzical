@@ -1,24 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Question from "./Question";
 
 export default function Quiz() {
+  const [quizData, setQuizData] = useState([]);
+
   //fetch data
   useEffect(function () {
     async function fetchQuestions() {
       try {
-        const res = await fetch(
+        const data = await fetch(
           "https://opentdb.com/api.php?amount=5&type=multiple"
         );
-        const data = await res.json();
-        console.log(data.results);
+        const questionsData = await data.json();
+        setQuizData(questionsData.results);
       } catch (error) {
         console.log("Error fetching quiz data", error);
       }
     }
     fetchQuestions();
   }, []);
-  return (
-    <div>
-      <h1>Quizzical questions</h1>
-    </div>
-  );
+
+  return <div>H</div>;
 }
